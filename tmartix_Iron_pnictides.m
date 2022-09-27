@@ -162,7 +162,6 @@ A22r = zeros(n_q,n_q,n_E);
 A33r = zeros(n_q,n_q,n_E);
 A44r = zeros(n_q,n_q,n_E);
 for k=1:n_E
-    k
 for i=1:n_q
 for j=1:n_q
 G1 = [G11r(i,j,k),G12r(i,j,k),G13r(i,j,k),G14r(i,j,k);...
@@ -189,12 +188,7 @@ A44r(i,j,k) = A(4,4);
 end
 end
 end
-% dnr = zeros(n_q,n_q,n_E);
-% dnq = zeros(n_q,n_q,n_E);
-% for k=1:n_E
-%     dnq(:,:,k) = -imag(fftshift(fft2(A11r(1:n_q,1:n_q,k))))/pi;
-%     dnr(:,:,k) = ifft2(ifftshift(dnq(:,:,k)));
-% end
+
 dnr = zeros(n_q,n_q,n_E);
 dnq = zeros(n_q,n_q,n_E);
 for k=1:n_E
@@ -202,23 +196,6 @@ for k=1:n_E
     dnr(:,:,k) = fftshift(fft2(dnq(:,:,k)));
 end
 
-
 imagesc(dnq(:,:,n_E));
 colormap('gray')
 axis equal;
-
-% figure('name','dnq');
-% colorscale = 'gray';
-% for k=1:n_E
-% subplot(ceil(n_E/4),4,k);
-% imagesc((abs(dnq(:,:,k))));
-% colormap(colorscale);
-% axis equal
-% xticks([1 n_q-1]);
-% xticklabels({'-\pi','\pi'});
-% yticks([1 n_q-1]);
-% yticklabels({'-\pi','\pi'});
-% xlabel('qx');
-% ylabel('qy');
-% title([num2str(-E+(k-1)*2*E/(n_E-1)) 'eV']);
-% end
